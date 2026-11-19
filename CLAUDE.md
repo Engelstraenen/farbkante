@@ -35,6 +35,9 @@ Storyboard-Wahl (Eugen) → First Frames 4K je Film-Kapitel (Eugen) → Video-Dr
 - 19.11.2026: Name FARBKANTE, Stadt Essen (Annahme, kein Widerspruch).
 - 19.11.2026: Storyboards 1 Rolle, 2 Krepp ab, 3 Zeitraffer gezeigt. Krepp abgelehnt (nicht maler-typisch). Eugens Wahl: Mix aus 1 + 3 wie FLUTLICHT27, Kapitel frei verbinden, Farblabor und alle Ideen rein, Recruiting (Azubis/Mitarbeiter) besonders wichtig.
 - 19.11.2026: Konzepte nur als Bild (globale Masterfile V2.17), Handwerks-Demo-Regeln (V2.18).
+- 19.11.2026: Mix B „Ein Haus“ gewählt (+ Bewerbungs-Doppelkapitel aus A). Bilder/Videos kostenlos (Eugen lehnte 975 bzw. 2.100 Credits ab).
+- 19.11.2026 (Eugens Video IMG_4604): Fenster + Rahmen/Leistungen gefallen. Ändern: Fassade startet OHNE Gerüst (Altbau grau), beim Scrollen baut sich das Gerüst auf, dann wird die Fassade im Zeitraffer gestrichen. Raum: Maler macht jeden Schritt sichtbar (Abdecken, Spachteln, Grundieren, Streichen). Karriere: Vorteile groß und animiert (umgesetzt: Kinetik-Typo auf echten Rollstrichen, + „Meister? Zahlen wir mit.“). Bewerben: linke Seite schöner (umgesetzt: gestaltetes Handy, Kartenstapel). Finale: keine lange graue Strecke (umgesetzt: 150vh, Rollstrich). Platzhalter nie zeigen.
+- 19.11.2026: Handy in Bewerben ist CSS (kein Foto M7 nötig), Finale nutzt Rollstrich aus M1 (M8 entfällt). Neue Startbilder FKM-F0 (Fassade vorher) und FKM-F4A (Raum vorher) in der Gratis-Schlange.
 
 ## 10. Ablage
 Code: Dropbox/CLAUDE/Projekte/FARBKANTE · Repo: github.com/Engelstraenen/farbkante (öffentlich) · Storyboards: konzepte/
