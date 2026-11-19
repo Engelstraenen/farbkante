@@ -108,7 +108,7 @@
       s.style.setProperty('--y0', (b[0] * 100) + '%');
       s.style.setProperty('--bh', (hgt * 100) + '%');
       if (hasImg) {
-        s.style.setProperty('--src', 'url(' + src('m1-streifen') + ')');
+        s.style.setProperty('--src', 'url("' + new URL(src('m1-streifen'), location.href).href + '")');
         s.style.setProperty('--bf', hgt);
         s.style.setProperty('--bp', (b[0] / (1 - hgt) * 100) + '%');
       } else s.classList.add('noimg');
@@ -143,7 +143,7 @@
     var k = seg(p, .14, .9) * 5, act = Math.min(4, Math.floor(k));
     stripes.forEach(function (s, i) {
       var r = clamp(k - i, 0, 1), e = ease(r) * STRIPE_END * 100;
-      s.style.setProperty('--rv', (r >= 1 ? 100 : e).toFixed(2) + '%');
+      s.style.setProperty('--rv', (r >= 1 ? STRIPE_END * 100 + 3 : e).toFixed(2) + '%');
       s.style.setProperty('--lo', seg(r, .5, 1).toFixed(3));
     });
     var r = clamp(k - act, 0, 1), b = BANDS[act];
@@ -185,7 +185,7 @@
     labName.textContent = 'Deine Wand in ' + COLORS[i][0];
     $$('.chip', S4).forEach(function (c, j) { c.setAttribute('aria-checked', j === i ? 'true' : 'false'); });
   }
-  if (IMG['m5b-maske']) room.style.setProperty('--mask', 'url(' + src('m5b-maske', true) + ')'); else room.classList.add('nomask');
+  if (IMG['m5b-maske']) room.style.setProperty('--mask', 'url("' + new URL(src('m5b-maske', true), location.href).href + '")'); else room.classList.add('nomask');
   var phone = $('.phone-scene', S4), calc = $('.calc', S4);
   if (GEO.screen) { var g = GEO.screen; var sc = $('.screen', phone);
     sc.style.setProperty('--sx0', g[0] * 100 + '%'); sc.style.setProperty('--sy0', g[1] * 100 + '%');

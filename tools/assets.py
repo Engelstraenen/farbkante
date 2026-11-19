@@ -76,8 +76,10 @@ def main():
                 m.resize((w, round(m.height * w / m.width)), Image.LANCZOS).save(os.path.join(OUT, "m5b-maske" + suf + ".png"), optimize=True)
             info["m5b-maske"] = {"w": im.width, "h": im.height, "png": True}
         else:
-            save_webp(im, name + ".webp", 3840)
-            save_webp(im, name + "-m.webp", 1800, 78)
+            dst = os.path.join(OUT, name + ".webp")
+            if not (os.path.exists(dst) and os.path.getmtime(dst) > os.path.getmtime(os.path.join(RAW, fn))):
+                save_webp(im, name + ".webp", 3840)
+                save_webp(im, name + "-m.webp", 1800, 78)
             info[name] = {"w": im.width, "h": im.height}
         print("ok", name, im.size)
     geo_p = os.path.join(ROOT, "tools", "geo.json")
