@@ -47,3 +47,40 @@ Counts: exactly two people, exactly two helmets, they stay seated on the same sp
 Style: photorealistic cinematic golden hour, natural skin texture, soft lens flare, ultra sharp scaffold and clothing detail, stable faces.
 Avoid: cuts, standing up, third person, morphing faces, changing clothes or helmets, extra fingers, falling, text, logos, watermark.
 ```
+
+---
+
+# Neue Filme nach Eugens Video-Feedback (19.11.2026, IMG_4604)
+
+Film 1 und Film 2 oben sind überholt. Neu: VORHER → ARBEIT → ERGEBNIS, jeder genannte Schritt ist im Film zu sehen.
+Recherche 20.11.2026: Gerüst-Zeitraffer m4YbEEf5alw (Kamera fest, Gerüst wächst Lage für Lage von unten, Rahmen + Bohlen + Diagonalen). Maler streichen die Fassade von oben nach unten.
+Sync mit der Seite (Film läuft über 72 % bzw. 78 % des Kapitels):
+- Fassade 20 s: 0–3 s Vorher (Hero-Text), 3–11 s Gerüst („Erst das Gerüst.“), 11–19 s Farbe („Dann die Farbe.“), 19–20 s fertig → Fenster-Zoom.
+- Raum 20 s: Schritt-Labels leuchten bei 2 / 6 / 10 / 14 s → Abdecken 1–6 s, Spachteln 6–10 s, Grundieren 10–14 s, Streichen 14–20 s.
+
+## Film 1b – Fassade (First Frame f0-fassade-vorher, 20 s, Wan 3.0 Unlimited 480P)
+
+```
+Locked-off static camera on a tripod, a true construction time-lapse, the camera never moves, never zooms, never cuts. Layout from left to right: calm slightly darker neighbouring old building and trees in the left third, the large five-storey old Berlin corner apartment building with a weathered grey stucco facade in the center and right, a quiet empty street in the foreground.
+Second 0-3: early morning, the old grey facade with flaking paint and dirty streaks stands bare, no scaffolding yet, clouds drift fast across the pale blue sky, shadows slide over the street.
+Second 3-11: a scaffolding crew in fast time-lapse motion erects a galvanized steel frame scaffold directly in front of the facade from the ground up: first the ground-floor level of vertical steel frames, wooden planks and red-and-white toe boards and guardrails appears, then the second level on top of it, then the third, the fourth and the fifth level, one level after another, each level bolted to the facade, ladders inside, diagonal braces, until the scaffold reaches the roof cornice and covers the whole front of the building. No netting, the facade stays visible behind the scaffold tubes.
+Second 11-19: painters in white work clothes move quickly on the scaffold levels in time-lapse motion and paint the facade from the top down: a fresh warm ochre plaster colour with crisp bright white stucco window surrounds and white cornices spreads from the roof storey downward floor by floor, the old grey disappears level by level, by second 19 the whole facade is fresh warm ochre with bright white stucco.
+Second 19-20: warm afternoon sunlight falls on the freshly painted ochre facade behind the clean empty scaffold, the painters are gone, the work is finished.
+Counts: exactly one building, exactly five storeys, the same number of windows in every frame, once a scaffold level is built it keeps exactly the same shape until the end.
+Style: photorealistic cinematic architectural time-lapse, natural daylight, ultra sharp scaffold tubes, planks, windows and plaster texture, stable geometry.
+Avoid: camera movement, zoom, cuts, morphing building, changing number of windows or storeys, netting, scaffold collapsing, scaffold appearing all at once, cars driving through, text, signs, logos, watermark.
+```
+
+## Film 2b – Raum (First Frame f4a-raum-vorher, 20 s, Wan 3.0 Unlimited 480P)
+
+```
+Locked-off static camera on a tripod in the left corner of the room, a true time-lapse of one working day, the painter works in fast motion, the camera never moves, never zooms, never cuts. Layout from left to right: the left wall with a tall double window and a radiator, the back wall with a second tall double window and a radiator, the right wall fully visible, old patchy grey-beige walls with cracks, small holes and remains of torn wallpaper, an ornate white stucco cornice, a bare worn wooden floor. The professional painter in white painter's clothes stands in the right third with a roll of grey protective fleece; a paint bucket, a long-handled paint roller and a filling knife lie on the floor next to him from the start.
+Second 0-1: the bare old room, the painter holds the fleece roll.
+Second 1-6 (covering): in fast motion he rolls out the grey protective fleece over the whole wooden floor strip by strip from the right wall to the left wall, then tapes the window frames and skirting boards with masking tape and wraps both radiators in clear plastic foil.
+Second 6-10 (filling): with the filling knife he fills every crack and hole in the right wall and the back wall with white filler, the old wallpaper remains disappear, the white patches are sanded flat and smooth.
+Second 10-14 (priming): with the long-handled roller he rolls milky white primer over the right wall and the back wall, the patchy grey-beige walls turn evenly bright matte white.
+Second 14-20 (painting): he dips the roller into the bucket and rolls deep teal paint onto the right wall in long vertical lanes from the stucco cornice down to the skirting board, lane after lane from left to right, until the whole right wall is wet glossy deep teal with a crisp straight line under the white cornice; the back wall stays clean bright white; at second 20 he stands in the right third, holds the roller still and looks at the finished wall.
+Counts: exactly one painter, exactly one roller, exactly one bucket, exactly two tall double windows, exactly two radiators, the stucco cornice always stays white.
+Style: photorealistic cinematic interior time-lapse, natural window daylight moving slowly across the floor, ultra sharp wall texture and wet paint sheen, stable room geometry.
+Avoid: camera movement, zoom, cuts, second painter, tools appearing from nowhere, teal paint on the ceiling or cornice, morphing face or hands, changing windows, text, logos, watermark.
+```

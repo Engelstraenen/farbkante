@@ -91,7 +91,8 @@ h1{font-size:var(--h1)}h2{font-size:var(--h2)}h3{font-size:var(--h3);line-height
 .rollover::after{content:"";position:absolute;top:0;bottom:0;right:-60px;width:60px;background:linear-gradient(90deg,rgba(19,119,124,.85),transparent)}
 
 /* Farblabor */
-.lab-bg{filter:brightness(.92)}
+.lab-bg{filter:brightness(calc(.92 * var(--lb,1)));transition:filter .8s ease}
+.lab-tint{position:absolute;inset:0;background:var(--wall,#13777c);mix-blend-mode:color;transition:background-color .8s ease;pointer-events:none}
 .lab{position:absolute;inset:0;display:grid;grid-template-columns:42% 58%;align-items:center;padding:90px var(--pad) 40px}
 .lab-l{position:relative;z-index:2}
 .lab-h{font-size:clamp(2.6rem,6.4vw,6rem);opacity:var(--lo,1)}

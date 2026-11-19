@@ -184,6 +184,11 @@
   function setColor(i) {
     if (i === curCol) return; curCol = i;
     room.style.setProperty('--wall', COLORS[i][1]);
+    // Echtes Rollen-Foto färbt sich mit: Farbton per Blend-Modus, Helligkeit nach der Farbe
+    var hx = COLORS[i][1], r = parseInt(hx.substr(1, 2), 16), g = parseInt(hx.substr(3, 2), 16), bl = parseInt(hx.substr(5, 2), 16);
+    var lum = (.299 * r + .587 * g + .114 * bl) / 255;
+    S4.style.setProperty('--wall', hx);
+    S4.style.setProperty('--lb', clamp(Math.pow(lum / .352, .7), .85, 1.6).toFixed(3));
     labName.textContent = 'Deine Wand in ' + COLORS[i][0];
     $$('.chip', S4).forEach(function (c, j) { c.setAttribute('aria-checked', j === i ? 'true' : 'false'); });
   }
