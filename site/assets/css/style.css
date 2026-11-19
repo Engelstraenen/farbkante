@@ -177,6 +177,7 @@ h1{font-size:var(--h1)}h2{font-size:var(--h2)}h3{font-size:var(--h3);line-height
 .toast{position:fixed;z-index:80;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:.7rem 1.1rem;border-radius:99px;font-weight:700;font-size:.9rem}
 
 @media (max-width:900px){
+  #raum .media>.still,#raum .media>.vid{object-position:76% 50%}#karriere .media>.still,#karriere .media>.vid{object-position:60% 50%}
   .dots{display:none}
   .lab{grid-template-columns:1fr;grid-template-rows:auto 1fr;padding:84px var(--pad) 16px;gap:10px;align-items:start}
   .fan{width:min(70%,320px)}
