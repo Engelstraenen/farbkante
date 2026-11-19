@@ -21,6 +21,8 @@
     if (IMG[n]) { el.src = src(n, el.hasAttribute('data-png')); }
     else { el.classList.add('ph'); el.setAttribute('data-ph', n + ' rendert'); el.removeAttribute('src'); }
   });
+  // Teile, deren Foto noch fehlt, ganz ausblenden statt Platzhalter zeigen
+  $$('[data-need]').forEach(function (el) { if (!IMG[el.getAttribute('data-need')]) el.style.visibility = 'hidden'; });
 
   /* ---------- Persönlicher Link: ?firma=Maler+Müller ---------- */
   (function () {
@@ -226,16 +228,32 @@
     $('.measure', phone).style.opacity = seg(p, .64, .7).toFixed(3);
   }
 
-  /* 5 Karriere */
-  var S5 = $('#karriere'), f5 = Film(S5, 0), b5 = $$('.beat', S5);
+  /* 5 Karriere: Film + Vorteile groß auf echten Rollstrichen */
+  var S5 = $('#karriere'), f5 = Film(S5, 0), b5 = $$('.beat', S5), PK = $$('.pk', S5), dim5 = $('.pk-dim', S5);
+  function absUrl(u) { return new URL(u, location.href).href; }
+  PK.forEach(function (pk) {
+    var n = 'stroke-' + pk.getAttribute('data-s'), el = $('.pk-s', pk);
+    if (IMG[n]) el.style.backgroundImage = 'url("' + absUrl(src(n, true)) + '")';
+    else el.style.background = 'var(--teal)';
+  });
   function ch5(p) {
-    f5(seg(p, 0, 1), 1.02 + .08 * p);
-    show(b5[0], band(p, .04, .55));
-    show(b5[1], band(p, .5, 1.2));
-    $$('.perks li', S5).forEach(function (li, i) { var o = seg(p, .52 + i * .06, .6 + i * .06); li.style.opacity = o; li.style.transform = 'translateY(' + (1 - o) * 14 + 'px)'; });
+    f5(seg(p, 0, 1), 1.02 + .1 * p);
+    show(b5[0], band(p, .02, .2));
+    dim5.style.opacity = (seg(p, .17, .25) * (1 - seg(p, .985, 1) * .4)).toFixed(3);
+    var n = PK.length, a = .22, span = (.99 - a) / n;
+    PK.forEach(function (pk, i) {
+      var t = (p - a - i * span) / span, last = i === n - 1;
+      var inn = eout(seg(t, 0, .34)), out = last ? 0 : ease(seg(t, .8, 1));
+      pk.style.visibility = (t > -.02 && (last || t < 1.02)) ? 'visible' : 'hidden';
+      pk.style.setProperty('--sv', (eout(seg(t, .02, .3)) * 100).toFixed(1) + '%');
+      pk.style.setProperty('--tx', ((1 - inn) * 38).toFixed(2) + 'vw');
+      pk.style.setProperty('--ty', (-out * 26).toFixed(2) + 'vh');
+      pk.style.opacity = Math.min(seg(t, .04, .22), 1 - out).toFixed(3);
+    });
   }
 
-  /* 6 Bewerben: Wisch-Karten */
+  /* 6 Bewerben: Handy mit Kartenstapel (wischen oder tippen), Uhr mit Ring */
+  var S6 = $('#bewerben');
   var Q = [
     ['Lieber drinnen oder draußen?', 'Drinnen', 'Draußen'],
     ['Höhe auf dem Gerüst?', 'Lieber unten', 'Kein Problem'],
@@ -243,42 +261,93 @@
     ['Wann kannst du starten?', 'Nach der Schule', 'Sofort'],
     ['Wie erreichen wir dich?', 'Anruf', 'WhatsApp']
   ];
-  var deck = $('.deck'), progEl = $('.prog'), qi = 0, t0 = 0, clockT, answers = [];
+  var deck = $('.deck', S6), progEl = $('.prog', S6), barEl = $('.ps-bar', S6), clockEl = $('.clock', S6);
+  var qi = 0, t0 = 0, clockT, answers = [], hinted = false;
   function fmt(s) { return Math.floor(s / 60) + ':' + ('0' + Math.floor(s % 60)).slice(-2); }
+  function tickClock() {
+    var s = (Date.now() - t0) / 1000;
+    $('b', clockEl).textContent = fmt(s);
+    clockEl.style.setProperty('--cl', Math.min(1, s / 60).toFixed(3));
+  }
+  function cardHtml(q, i) {
+    return '<span class="stamp l">' + q[1] + '</span><span class="stamp r">' + q[2] + '</span>' +
+      '<div><span class="qn">FRAGE ' + (i + 1) + '</span><h4>' + q[0] + '</h4></div>' +
+      '<div class="opts"><button class="l">' + q[1] + '</button><button class="r">' + q[2] + '</button></div>';
+  }
   function renderCard() {
     deck.innerHTML = '';
+    barEl.style.setProperty('--pb', (qi / Q.length * 100) + '%');
     if (qi >= Q.length) {
       clearInterval(clockT);
       var s = (Date.now() - t0) / 1000;
-      deck.innerHTML = '<div class="card done"><h4>Fertig in ' + fmt(s) + '.</h4><p>Wir melden uns per ' + (answers[4] || 'WhatsApp') + '. (Demo, es wird nichts gesendet.)</p></div>';
+      deck.innerHTML = '<div class="card done"><div class="ok">✓</div><h4>Fertig in ' + fmt(s) + '.</h4><p>Wir melden uns per ' + (answers[4] || 'WhatsApp') + '.<br>Demo, es wird nichts gesendet.</p></div>';
       progEl.textContent = 'Geschafft'; return;
     }
+    for (var k = Math.min(2, Q.length - qi - 1); k >= 1; k--) {
+      var b = document.createElement('div'); b.className = 'card back'; b.style.setProperty('--k', k);
+      b.innerHTML = cardHtml(Q[qi + k], qi + k); deck.appendChild(b);
+    }
     var q = Q[qi], c = document.createElement('div'); c.className = 'card';
-    c.innerHTML = '<h4>' + q[0] + '</h4><div class="opts"><span>← ' + q[1] + '</span><span>' + q[2] + ' →</span></div>';
+    c.innerHTML = cardHtml(q, qi);
     deck.appendChild(c); progEl.textContent = 'Frage ' + (qi + 1) + ' von ' + Q.length;
-    var sx = null, dx = 0;
-    c.addEventListener('pointerdown', function (e) { sx = e.clientX; c.setPointerCapture(e.pointerId); c.style.transition = 'none'; });
-    c.addEventListener('pointermove', function (e) { if (sx == null) return; dx = e.clientX - sx; c.style.transform = 'translateX(' + dx + 'px) rotate(' + dx / 18 + 'deg)'; });
-    c.addEventListener('pointerup', function () { c.style.transition = ''; if (Math.abs(dx) > 70) answer(dx > 0); else c.style.transform = ''; sx = null; dx = 0; });
+    if (!hinted && S6.classList.contains('in')) { hinted = true; c.classList.add('nudge'); }
+    $('.opts .l', c).addEventListener('click', function (e) { e.stopPropagation(); answer(false); });
+    $('.opts .r', c).addEventListener('click', function (e) { e.stopPropagation(); answer(true); });
+    var sx = null, dx = 0, sl = $('.stamp.l', c), sr = $('.stamp.r', c);
+    c.addEventListener('pointerdown', function (e) {
+      if (e.target.tagName === 'BUTTON') return;
+      sx = e.clientX; c.setPointerCapture(e.pointerId); c.style.transition = 'none'; c.classList.remove('nudge');
+    });
+    c.addEventListener('pointermove', function (e) {
+      if (sx == null) return; dx = e.clientX - sx;
+      c.style.transform = 'translateX(' + dx + 'px) rotate(' + dx / 16 + 'deg)';
+      sr.style.opacity = clamp(dx / 90, 0, 1); sl.style.opacity = clamp(-dx / 90, 0, 1);
+    });
+    c.addEventListener('pointerup', function () {
+      if (sx == null) return;
+      c.style.transition = '';
+      if (Math.abs(dx) > 70) answer(dx > 0); else { c.style.transform = ''; sr.style.opacity = sl.style.opacity = 0; }
+      sx = null; dx = 0;
+    });
   }
   function answer(right) {
-    if (!t0) { t0 = Date.now(); clockT = setInterval(function () { $('.clock b').textContent = fmt((Date.now() - t0) / 1000); }, 250); }
+    if (!t0) { t0 = Date.now(); clockT = setInterval(tickClock, 200); }
     if (qi >= Q.length) return;
     answers[qi] = Q[qi][right ? 2 : 1];
-    var c = $('.card', deck); if (c) { c.style.transform = 'translateX(' + (right ? 140 : -140) + '%) rotate(' + (right ? 18 : -18) + 'deg)'; c.style.opacity = 0; }
-    qi++; setTimeout(renderCard, 260);
+    var cs = $$('.card', deck), c = cs[cs.length - 1];
+    if (c) { c.style.transform = 'translateX(' + (right ? 150 : -150) + '%) rotate(' + (right ? 22 : -22) + 'deg)'; c.style.opacity = 0; }
+    $$('.card.back', deck).forEach(function (b) { b.style.setProperty('--k', +b.style.getPropertyValue('--k') - 1); });
+    qi++; setTimeout(renderCard, 300);
   }
-  $('.deck-nav .no').addEventListener('click', function () { answer(false); });
-  $('.deck-nav .yes').addEventListener('click', function () { answer(true); });
-  $$('.roles button').forEach(function (b) { b.addEventListener('click', function () { $$('.roles button').forEach(function (x) { x.setAttribute('aria-pressed', x === b); }); }); });
+  $('.deck-nav .no', S6).addEventListener('click', function () { answer(false); });
+  $('.deck-nav .yes', S6).addEventListener('click', function () { answer(true); });
+  $$('.roles button', S6).forEach(function (b) { b.addEventListener('click', function () { $$('.roles button', S6).forEach(function (x) { x.setAttribute('aria-pressed', x === b); }); }); });
   renderCard();
-  if (IMG['m7-handy-front'] && IMG['m7-handy-front'].screen) {
-    var ap = $('.apply-phone'), g7 = IMG['m7-handy-front'];
-    ap.style.setProperty('--pa', g7.w + '/' + g7.h);
-    var sc7 = $('.screen', ap), q7 = g7.screen;
-    sc7.style.setProperty('--sx0', q7[0] * 100 + '%'); sc7.style.setProperty('--sy0', q7[1] * 100 + '%');
-    sc7.style.setProperty('--sw', (q7[2] - q7[0]) * 100 + '%'); sc7.style.setProperty('--sh', (q7[3] - q7[1]) * 100 + '%');
-  }
+  // Einstieg: Handy dreht sich rein, Pinselstriche wischen auf
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting && !S6.classList.contains('in')) {
+          S6.classList.add('in');
+          setTimeout(function () { var c = $$('.card', deck).pop(); if (c && !hinted && !t0) { hinted = true; c.classList.add('nudge'); } }, 900);
+        }
+      });
+    }, { threshold: .3 }).observe($(".stage", S6));
+  } else S6.classList.add('in');
+  // Handy folgt leicht der Maus
+  var ph = $('.phone', S6);
+  S6.addEventListener('pointermove', function (e) {
+    if (mobile()) return;
+    var r = S6.getBoundingClientRect();
+    ph.style.setProperty('--ry', ((e.clientX - r.left) / r.width - .5) * 14);
+    ph.style.setProperty('--rx', -((e.clientY - r.top) / r.height - .5) * 10);
+  });
+  // Echte Rollstriche als Hintergrund (Bewerben, Finale)
+  $$('[data-stroke]').forEach(function (el) {
+    var n = 'stroke-' + el.getAttribute('data-stroke');
+    if (IMG[n]) el.style.backgroundImage = 'url("' + absUrl(src(n, true)) + '")';
+    else el.style.background = 'var(--teal)';
+  });
 
   /* 7 Finale: Rolle malt die Wortmarke */
   var S7 = $('#termin'), paint = $('.paint', S7), roller7 = $('.roller', S7);

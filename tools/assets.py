@@ -57,8 +57,42 @@ def green_mask(im):
     return Image.fromarray(rgba, "RGBA")
 
 
+def band_cutouts(im, bands, info):
+    """Schneidet die 5 echten Rollstriche aus m1-streifen frei (Alpha aus Abstand zum Kohle-Hintergrund).
+    Ergebnis: site/assets/img/stroke-<i>.png (1600 breit) und stroke-<i>-m.png (800 breit)."""
+    a = np.asarray(im.convert("RGB")).astype(np.float32)
+    h, w = a.shape[:2]
+    bg = np.median(np.concatenate([a[:max(4, h // 60)].reshape(-1, 3), a[-max(4, h // 60):].reshape(-1, 3)]), axis=0)
+    for i, (y0, y1) in enumerate(bands):
+        pad = 0.01
+        t, b = max(0, int((y0 - pad) * h)), min(h, int((y1 + pad) * h))
+        crop = a[t:b]
+        d = np.abs(crop - bg).sum(2)
+        alpha = np.clip((d - 45) / 45, 0, 1)
+        # Wand-Sprenkel entfernen: nur zusammenhängende Fläche des Strichs behalten
+        import cv2
+        m = (alpha > .35).astype(np.uint8)
+        n, lab, st, _ = cv2.connectedComponentsWithStats(m, 8)
+        if n > 1:
+            big = 1 + int(np.argmax(st[1:, cv2.CC_STAT_AREA]))
+            keep = (lab == big).astype(np.uint8)
+            keep = cv2.dilate(keep, np.ones((5, 5), np.uint8))
+            alpha = alpha * keep
+        # Breite: dort, wo der Strich in der Bandmitte endet
+        mid = alpha[int(alpha.shape[0] * .3):int(alpha.shape[0] * .7)]
+        cols = np.where(mid.mean(0) > .05)[0]
+        x1 = min(w, cols.max() + 30) if len(cols) else w
+        rgba = np.dstack([crop, alpha * 255]).astype(np.uint8)[:, :x1]
+        out = Image.fromarray(rgba, "RGBA")
+        for suf, ww in (("", 1600), ("-m", 800)):
+            out.resize((ww, round(out.height * ww / out.width)), Image.LANCZOS).save(os.path.join(OUT, "stroke-%d%s.png" % (i, suf)), optimize=True)
+        info["stroke-%d" % i] = {"w": out.width, "h": out.height, "png": True}
+        print("ok stroke-%d" % i, out.size)
+
+
 def main():
     info = {}
+    geo_all = json.load(open(os.path.join(ROOT, "tools", "geo.json"))) if os.path.exists(os.path.join(ROOT, "tools", "geo.json")) else {}
     for fn in sorted(os.listdir(RAW)):
         if not fn.lower().endswith((".png", ".jpg", ".jpeg", ".webp")):
             continue
@@ -77,10 +111,18 @@ def main():
             info["m5b-maske"] = {"w": im.width, "h": im.height, "png": True}
         else:
             dst = os.path.join(OUT, name + ".webp")
-            if not (os.path.exists(dst) and os.path.getmtime(dst) > os.path.getmtime(os.path.join(RAW, fn))):
+            fresh = not (os.path.exists(dst) and os.path.getmtime(dst) > os.path.getmtime(os.path.join(RAW, fn)))
+            if fresh:
                 save_webp(im, name + ".webp", 3840)
                 save_webp(im, name + "-m.webp", 1800, 78)
             info[name] = {"w": im.width, "h": im.height}
+            if name == "m1-streifen" and geo_all.get("geo", {}).get("bands"):
+                if fresh or not os.path.exists(os.path.join(OUT, "stroke-0.png")):
+                    band_cutouts(im, geo_all["geo"]["bands"], info)
+                else:
+                    for i in range(len(geo_all["geo"]["bands"])):
+                        s = Image.open(os.path.join(OUT, "stroke-%d.png" % i))
+                        info["stroke-%d" % i] = {"w": s.width, "h": s.height, "png": True}
         print("ok", name, im.size)
     geo_p = os.path.join(ROOT, "tools", "geo.json")
     geo = json.load(open(geo_p)) if os.path.exists(geo_p) else {}

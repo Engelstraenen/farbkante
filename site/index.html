@@ -7,8 +7,8 @@
 <meta name="description" content="Demo von PROJEKT EX: Website für einen erfundenen Maler- und Lackiererbetrieb.">
 <meta name="theme-color" content="#16191b">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2316191b'/%3E%3Crect x='10' y='22' width='38' height='16' rx='4' fill='%23138086'/%3E%3Cpath d='M48 30h6v14H36v8' fill='none' stroke='%23e9e6df' stroke-width='4'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="assets/css/style.css?v=1795123026">
-<script>try{fetch('version.txt?'+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.text():''}).then(function(v){v=v.trim();if(v&&v!=='1795123026'&&location.search.indexOf('v='+v)<0){var u=new URL(location.href);u.searchParams.set('v',v);location.replace(u.href)}}).catch(function(){})}catch(e){}</script>
+<link rel="stylesheet" href="assets/css/style.css?v=1795125578">
+<script>try{fetch('version.txt?'+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.text():''}).then(function(v){v=v.trim();if(v&&v!=='1795125578'&&location.search.indexOf('v='+v)<0){var u=new URL(location.href);u.searchParams.set('v',v);location.replace(u.href)}}).catch(function(){})}catch(e){}</script>
 </head>
 <body>
 <div class="demo"><span class="for">So könnte das für <span data-firma></span> aussehen. </span><b>Demo von <a href="https://projektex.de/" rel="noopener">PROJEKT EX</a></b>: erfundener Betrieb, alle Personen, Zahlen und Stimmen sind Beispiele.</div>
@@ -105,11 +105,11 @@
         <p class="sub lab-name"></p>
       </div>
       <div class="lab-r">
-        <div class="room">
+        <div class="room" data-need="m5a-raum-weiss">
           <img class="still" data-img="m5a-raum-weiss" alt="Wohnzimmer im Altbau">
           <div class="wall"></div>
         </div>
-        <div class="phone-scene" id="foto">
+        <div class="phone-scene" id="foto" data-need="m6-handy-wand">
           <img class="still" data-img="m6-handy-wand" alt="Hand hält Handy vor die Wand">
           <div class="screen">
             <div class="cam">
@@ -133,44 +133,57 @@
 </section>
 
 <!-- 5 FILM: Karriere -->
-<section class="ch film" id="karriere" data-ch="karriere" style="--h:300vh">
+<section class="ch film" id="karriere" data-ch="karriere" style="--h:620vh">
   <div class="stage">
     <div class="media">
       <video class="vid" muted playsinline preload="auto" data-src="assets/vid/karriere"></video>
       <img class="still" data-img="f5-karriere" alt="Malerin und Azubi sitzen bei Sonnenuntergang auf dem Gerüst">
     </div>
     <div class="shade"></div>
+    <div class="pk-dim"></div>
     <div class="beat b-1"><p class="kicker">Ausbildung & Jobs</p><h2>Oben ist die<br>Aussicht besser.</h2></div>
-    <div class="beat b-2"><ul class="perks"><li>Feste Crew statt Zeitarbeit</li><li>Führerschein zahlen wir</li><li>Weg zum Meister</li><li>Eigenes Werkzeug ab Tag 1</li></ul></div>
+    <div class="pks" aria-label="Was du bei uns bekommst">
+      <div class="pk" data-s="0"><span class="pk-n">01 / 05</span><div class="pk-w"><i class="pk-s"></i><h3>Feste Crew.</h3></div><p>Statt Zeitarbeit. Du weißt, mit wem du morgen auf dem Gerüst stehst.</p></div>
+      <div class="pk" data-s="1"><span class="pk-n">02 / 05</span><div class="pk-w"><i class="pk-s"></i><h3>Führerschein?</h3></div><p>Zahlen wir. Klasse B, ab dem zweiten Lehrjahr.</p></div>
+      <div class="pk" data-s="3"><span class="pk-n">03 / 05</span><div class="pk-w"><i class="pk-s"></i><h3>Meister?</h3></div><p>Zahlen wir mit. Und du bekommst die Zeit dafür.</p></div>
+      <div class="pk dark" data-s="2"><span class="pk-n">04 / 05</span><div class="pk-w"><i class="pk-s"></i><h3>Eigenes Werkzeug.</h3></div><p>Ab Tag 1. Deine Rolle, dein Spachtel, deine Kiste.</p></div>
+      <div class="pk" data-s="0"><span class="pk-n">05 / 05</span><div class="pk-w"><i class="pk-s"></i><h3>Bock auf Farbe?</h3></div><p>Bewerben dauert 60 Sekunden. Scroll weiter.</p></div>
+    </div>
   </div>
 </section>
 
 <!-- 6 MOTION: Bewerben in 60 Sekunden -->
 <section class="ch motion" id="bewerben" data-ch="bewerben">
   <div class="stage static">
+    <i class="ap-bg s0" data-stroke="0"></i><i class="ap-bg s1" data-stroke="1"></i>
     <div class="apply">
-      <div class="apply-phone">
-        <img class="still" data-img="m7-handy-front" alt="">
-        <div class="screen">
-          <div class="deck" aria-live="polite"></div>
-          <div class="deck-nav"><button class="no" aria-label="Links">←</button><span class="prog">Frage 1 von 5</span><button class="yes" aria-label="Rechts">→</button></div>
+      <div class="phone3d">
+        <div class="phone">
+          <div class="island"></div>
+          <div class="pscreen">
+            <div class="ps-top"><b>FARBKANTE</b><span class="prog">Frage 1 von 5</span></div>
+            <div class="ps-bar"><i></i></div>
+            <div class="deck" aria-live="polite"></div>
+            <div class="deck-nav"><button class="no" aria-label="Links">←</button><span class="dn-hint">wischen oder tippen</span><button class="yes" aria-label="Rechts">→</button></div>
+          </div>
         </div>
       </div>
       <div class="apply-t">
-        <h2>Bewerben in 60 Sekunden.<br>Ohne Lebenslauf.</h2>
+        <p class="kicker">Jobs & Ausbildung</p>
+        <h2>Bewerben in<br><span class="mk"><i class="mk-s" data-stroke="0"></i><span>60 Sekunden.</span></span><br>Ohne Lebenslauf.</h2>
+        <p class="ap-sub">Fünf Fragen, wischen statt schreiben. Wir rufen dich an.</p>
         <div class="roles" role="radiogroup" aria-label="Ich will"><button aria-pressed="true">Ausbildung</button><button aria-pressed="false">Geselle</button><button aria-pressed="false">Quereinstieg</button></div>
-        <p class="tags"><span>Feste Crew</span><span>Führerschein</span><span>Meister-Weg</span></p>
-        <p class="clock">Deine Zeit: <b>0:00</b></p>
+        <div class="clock"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="19"/><circle class="ring" cx="22" cy="22" r="19"/></svg><div><small>Deine Zeit</small><b>0:00</b></div></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- 7 MOTION: Finale -->
-<section class="ch motion" id="termin" data-ch="finale" style="--h:200vh">
+<section class="ch motion" id="termin" data-ch="finale" style="--h:150vh">
   <div class="stage">
     <div class="paint">
-      <img class="still" data-img="m8-teal-streifen" alt="">
+      <i class="fin-s" data-stroke="0"></i>
       <div class="word">FARBKANTE</div>
       <img class="roller" data-img="r1-rolle" data-png alt="">
     </div>
@@ -208,7 +221,7 @@
 </dialog>
 <div class="toast" role="status" hidden></div>
 
-<script src="assets/js/img.js?v=1795123026"></script>
-<script src="assets/js/app.js?v=1795123026"></script>
+<script src="assets/js/img.js?v=1795125578"></script>
+<script src="assets/js/app.js?v=1795125578"></script>
 </body>
 </html>
