@@ -29,7 +29,7 @@ Storyboard-Wahl (Eugen) → First Frames 4K je Film-Kapitel (Eugen) → Video-Dr
 (folgt mit dem ersten Code)
 
 ## 8. Offene Fragen
-- Wahl Mix A „Ein Raum“ oder Mix B „Ein Haus“.
+- Wahl Mix A „Ein Raum“ oder Mix B „Ein Haus“ (Storyboards in konzepte/mix-a-*, mix-b-*). Kapitel-Material: konzepte/4-, 5-, 6-.
 
 ## 9. Entschieden
 - 19.11.2026: Name FARBKANTE, Stadt Essen (Annahme, kein Widerspruch).
