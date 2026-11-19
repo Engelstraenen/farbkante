@@ -68,7 +68,7 @@ h1{font-size:var(--h1)}h2{font-size:var(--h2)}h3{font-size:var(--h3);line-height
 .frame-in{position:absolute;left:var(--fx0,21%);top:var(--fy0,19%);width:var(--fw,58%);height:var(--fh,62%)}
 .stripes{position:absolute;inset:0}
 .stripe-img{display:none}
-.stripe{position:absolute;left:0;width:100%;top:var(--y0);height:var(--bh);background-image:var(--src);background-size:100% calc(100% / var(--bf));background-position:0 var(--bp);background-repeat:no-repeat;clip-path:inset(0 calc(100% - var(--rv,0%)) 0 0);text-align:left;padding-left:clamp(10px,2vw,26px);display:flex;align-items:center}
+.stripe{mix-blend-mode:lighten;position:absolute;left:0;width:100%;top:var(--y0);height:var(--bh);background-image:var(--src);background-size:100% calc(100% / var(--bf));background-position:0 var(--bp);background-repeat:no-repeat;clip-path:inset(0 calc(100% - var(--rv,0%)) 0 0);text-align:left;padding-left:clamp(10px,2vw,26px);display:flex;align-items:center}
 .stripe.noimg{background:var(--c)}
 .stripe span{font-weight:800;font-size:clamp(.95rem,2.3vw,1.9rem);letter-spacing:-.02em;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.35);opacity:var(--lo,0);transform:translateX(calc((1 - var(--lo,0)) * -14px))}
 .stripe[data-i="2"] span{color:#2a2620;text-shadow:none}
