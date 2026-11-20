@@ -88,9 +88,10 @@
   function ch1(p) {
     f1(seg(p, 0, .72), 1 + .14 * ease(seg(p, 0, .72)));
     show(b1[0], 1 - seg(p, .06, .14), 30);
-    show(b1[1], band(p, .2, .42));
-    show(b1[2], band(p, .46, .68));
-    t1.classList.toggle('on', p > .46 && p < .74);
+    // Film-Takt (Fassade 15 s): Gerüst wächst 1–6,5 s, Streichen 7–13 s
+    show(b1[1], band(p, .14, .33));
+    show(b1[2], band(p, .35, .62));
+    t1.classList.toggle('on', p > .35 && p < .74);
     var w = seg(p, .72, 1), win = $('.window', S1);
     win.style.opacity = seg(p, .72, .78).toFixed(3);
     win.style.setProperty('--wz', (1 + 5.5 * Math.pow(ease(seg(p, .78, 1)), 1.6)).toFixed(3));
