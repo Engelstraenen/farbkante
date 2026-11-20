@@ -68,7 +68,8 @@
     var base = v.getAttribute('data-src');
     if (base && (window.FK_VID || {})[sec.id]) {
       var s = document.createElement('source');
-      s.src = base + (mobile() ? '-m' : '') + '.mp4?v=' + FK_VID._v; s.type = 'video/mp4'; v.appendChild(s);
+      // volle 2K-Auflösung: Desktop 2560, Handy hochkant 1080x1440-Ausschnitt (-p), Handy quer 1280 (-m)
+      s.src = base + (mobile() ? (innerWidth / innerHeight <= .75 ? '-p' : '-m') : '') + '.mp4?v=' + FK_VID._v; s.type = 'video/mp4'; v.appendChild(s);
       v.addEventListener('loadeddata', function () { ok = true; stage.classList.add('has-vid'); });
       v.load(); var pr = v.play && v.play(); if (pr && pr.then) pr.then(function () { v.pause(); }).catch(function () {});
     }
