@@ -38,6 +38,8 @@
  },
  "img": {},
  "vid": {
-  "karriere": 1
+  "karriere": 1,
+  "fassade": 1,
+  "raum": 1
  }
 }

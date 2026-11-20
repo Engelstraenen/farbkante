@@ -45,8 +45,8 @@ def main():
         shutil.copy2(src, keep)
     w, h = width(src)
     big = min(w, 1920)
-    s1 = enc(src, os.path.join(OUT, ch + ".mp4"), big, 20)
-    s2 = enc(src, os.path.join(OUT, ch + "-m.mp4"), min(w, 720), 23)
+    s1 = enc(src, os.path.join(OUT, ch + ".mp4"), big, 24)
+    s2 = enc(src, os.path.join(OUT, ch + "-m.mp4"), min(w, 720), 26)
     print("quelle %dx%d -> %s.mp4 %d breit %.1f MB, -m %.1f MB" % (w, h, ch, big, s1 / 1e6, s2 / 1e6))
     gp = os.path.join(ROOT, "tools", "geo.json")
     geo = json.load(open(gp)) if os.path.exists(gp) else {}
