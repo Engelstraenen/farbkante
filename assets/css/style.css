@@ -277,3 +277,19 @@ h1{font-size:var(--h1)}h2{font-size:var(--h2)}h3{font-size:var(--h3);line-height
 
 /* Schritt-Liste nur mit Film (nie Schritte über einem Standbild) */
 #raum .stage:not(.has-vid) .steps{display:none}
+
+/* Bewerben: Kontaktkarte am Ende */
+#bewerben .card.form{cursor:default;user-select:text;touch-action:auto;justify-content:flex-start;gap:14px;padding:24px 18px 18px}
+#bewerben .card.form h4{font-size:clamp(1.35rem,2vw,1.7rem)}
+#bewerben .card.form .fields{display:flex;flex-direction:column;gap:8px}
+#bewerben .card.form .row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+#bewerben .card.form input{width:100%;min-width:0;padding:.7rem .8rem;border-radius:12px;border:1.5px solid #e2ddd2;background:#f7f5f0;font:inherit;font-size:16px;color:#16191b;outline:none;transition:border-color .2s,background .2s}
+#bewerben .card.form input:focus{border-color:var(--teal);background:#fff}
+#bewerben .card.form input.err{border-color:#c4673f;background:#fbefe9}
+#bewerben .card.form .send{margin-top:auto;padding:.95rem;border-radius:16px;background:var(--teal);color:#fff;font-weight:800;font-size:.95rem}
+#bewerben .card.form.shake{animation:fshake .4s}
+@keyframes fshake{25%{transform:translateX(-8px)}50%{transform:translateX(7px)}75%{transform:translateX(-4px)}}
+#bewerben.form-on .deck-nav button,#bewerben.form-on .deck-nav .dn-hint{visibility:hidden}
+@media (max-width:600px){#bewerben .card.form{top:1%;bottom:1%;left:12px;right:12px;gap:8px;padding:16px 12px 12px}#bewerben .card.form h4{font-size:1.2rem;margin-top:.3rem}#bewerben .card.form input{padding:.5rem .65rem}#bewerben .card.form .fields{gap:6px}#bewerben .card.form .row2{gap:6px}#bewerben .card.form .send{padding:.8rem}}
+@media (max-width:380px){#bewerben .card.form .qn{display:none}#bewerben .card.form h4{margin-top:0}}
+#bewerben .card.form{overflow-y:auto}
