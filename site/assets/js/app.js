@@ -227,7 +227,13 @@
     room.style.transform = 'translateY(' + (-40 * t).toFixed(1) + 'px) scale(' + (1 - .04 * t).toFixed(3) + ')';
     phone.style.opacity = t.toFixed(3);
     phone.style.transform = 'translateY(' + (40 * (1 - t)).toFixed(1) + 'px) scale(' + (.96 + .04 * t).toFixed(3) + ')';
-    $('.lab-l', S4).style.opacity = (1 - .55 * t).toFixed(3);
+    var labL = $('.lab-l', S4), labR = $('.lab-r', S4);
+    if (mobile()) {
+      // Handy: Fächer + Farben weichen, das Handy-Bild rückt nach oben über den Rechner
+      var hh = $('.lab-h', S4), dy = labR.offsetTop - (labL.offsetTop + hh.offsetTop + hh.offsetHeight + 12);
+      labL.querySelectorAll('.fan,.chips,.lab-name').forEach(function (e) { e.style.opacity = (1 - t).toFixed(3); });
+      labR.style.transform = 'translateY(' + (-dy * t).toFixed(1) + 'px)';
+    } else { labL.style.opacity = (1 - .55 * t).toFixed(3); labR.style.transform = ''; }
     calc.classList.toggle('on', p > .62 && p < .99);
     // Messfeld zieht sich beim Scrollen auf
     $('.measure', phone).style.opacity = seg(p, .64, .7).toFixed(3);

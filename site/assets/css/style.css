@@ -105,7 +105,7 @@ h1{font-size:var(--h1)}h2{font-size:var(--h2)}h3{font-size:var(--h3);line-height
 .lab-r{position:relative;height:100%;display:grid;place-items:center}
 .room,.phone-scene{position:absolute;width:100%;aspect-ratio:16/9;border-radius:var(--r);overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.45);will-change:transform,opacity}
 .room .wall{position:absolute;inset:0;background:var(--wall,transparent);mix-blend-mode:multiply;-webkit-mask-image:var(--mask);mask-image:var(--mask);-webkit-mask-size:100% 100%;mask-size:100% 100%;transition:background .6s}
-.room.nomask .wall{-webkit-mask-image:linear-gradient(#000,#000);mask-image:linear-gradient(#000,#000);opacity:.35}
+.room.nomask .wall{display:none}
 .phone-scene{opacity:0;transform:translateY(40px) scale(.96)}
 .screen{position:absolute;left:var(--sx0,43%);top:var(--sy0,14%);width:var(--sw,14%);height:var(--sh,62%);border-radius:var(--sr,10px);overflow:hidden;background:#0b0d0e;display:flex;flex-direction:column}
 .cam{position:relative;flex:1;background:var(--camimg,linear-gradient(160deg,#145d61,#0d3f42));background-size:cover;background-position:center}
@@ -293,3 +293,5 @@ h1{font-size:var(--h1)}h2{font-size:var(--h2)}h3{font-size:var(--h3);line-height
 @media (max-width:600px){#bewerben .card.form{top:1%;bottom:1%;left:12px;right:12px;gap:8px;padding:16px 12px 12px}#bewerben .card.form h4{font-size:1.2rem;margin-top:.3rem}#bewerben .card.form input{padding:.5rem .65rem}#bewerben .card.form .fields{gap:6px}#bewerben .card.form .row2{gap:6px}#bewerben .card.form .send{padding:.8rem}}
 @media (max-width:380px){#bewerben .card.form .qn{display:none}#bewerben .card.form h4{margin-top:0}}
 #bewerben .card.form{overflow-y:auto}
+
+@media (max-width:600px){.calc{padding:.9rem 1rem}.calc h3{font-size:1rem;margin-bottom:.4rem}.calc .fine{display:none}.calc label{margin:.3rem 0}}
