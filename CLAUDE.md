@@ -39,5 +39,7 @@ Storyboard-Wahl (Eugen) → First Frames 4K je Film-Kapitel (Eugen) → Video-Dr
 - 19.11.2026 (Eugens Video IMG_4604): Fenster + Rahmen/Leistungen gefallen. Ändern: Fassade startet OHNE Gerüst (Altbau grau), beim Scrollen baut sich das Gerüst auf, dann wird die Fassade im Zeitraffer gestrichen. Raum: Maler macht jeden Schritt sichtbar (Abdecken, Spachteln, Grundieren, Streichen). Karriere: Vorteile groß und animiert (umgesetzt: Kinetik-Typo auf echten Rollstrichen, + „Meister? Zahlen wir mit.“). Bewerben: linke Seite schöner (umgesetzt: gestaltetes Handy, Kartenstapel). Finale: keine lange graue Strecke (umgesetzt: 150vh, Rollstrich). Platzhalter nie zeigen.
 - 19.11.2026: Handy in Bewerben ist CSS (kein Foto M7 nötig), Finale nutzt Rollstrich aus M1 (M8 entfällt). Neue Startbilder FKM-F0 (Fassade vorher) und FKM-F4A (Raum vorher) in der Gratis-Schlange.
 
+- 20.11.2026: Bewerbung endet mit Kontaktkarte (Vorname, Nachname, Wohnort, E-Mail, Handynummer), mehr Felder nicht (Eugen).
+
 ## 10. Ablage
 Code: Dropbox/CLAUDE/Projekte/FARBKANTE · Repo: github.com/Engelstraenen/farbkante (öffentlich) · Storyboards: konzepte/

@@ -279,22 +279,54 @@
       '<div><span class="qn">FRAGE ' + (i + 1) + '</span><h4>' + q[0] + '</h4></div>' +
       '<div class="opts"><button class="l">' + q[1] + '</button><button class="r">' + q[2] + '</button></div>';
   }
+  var STEPS = Q.length + 1, sent = false;
+  var FORM_HEAD = '<div><span class="qn">LETZTER SCHRITT</span><h4>Wie erreichen wir dich?</h4></div>';
+  function renderForm() {
+    S6.classList.add('form-on');
+    progEl.textContent = 'Fast fertig';
+    var c = document.createElement('form'); c.className = 'card form'; c.noValidate = true;
+    c.innerHTML = FORM_HEAD +
+      '<div class="fields">' +
+      '<div class="row2"><input name="vn" autocomplete="given-name" placeholder="Vorname" aria-label="Vorname" required>' +
+      '<input name="nn" autocomplete="family-name" placeholder="Nachname" aria-label="Nachname" required></div>' +
+      '<input name="ort" autocomplete="address-level2" placeholder="Wohnort" aria-label="Wohnort" required>' +
+      '<input name="mail" type="email" autocomplete="email" inputmode="email" placeholder="E-Mail" aria-label="E-Mail" required>' +
+      '<input name="tel" type="tel" autocomplete="tel" inputmode="tel" placeholder="Handynummer" aria-label="Handynummer" required>' +
+      '</div><button class="send" type="submit">Bewerbung abschicken</button>';
+    deck.appendChild(c);
+    var ins = Array.prototype.slice.call(c.querySelectorAll('input'));
+    ins.forEach(function (i) { i.addEventListener('input', function () { i.classList.remove('err'); }); });
+    c.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var bad = ins.filter(function (i) { return !i.value.trim() || !i.checkValidity() || (i.name === 'tel' && !/^[0-9 +()\/-]{6,}$/.test(i.value.trim())); });
+      ins.forEach(function (i) { i.classList.toggle('err', bad.indexOf(i) >= 0); });
+      if (bad.length) { bad[0].focus(); c.classList.remove('shake'); void c.offsetWidth; c.classList.add('shake'); return; }
+      sent = { vn: c.elements.vn.value.trim(), tel: c.elements.tel.value.trim() };
+      c.style.transform = 'translateY(-120%) rotate(-6deg)'; c.style.opacity = 0;
+      setTimeout(renderCard, 320);
+    });
+  }
   function renderCard() {
     deck.innerHTML = '';
-    barEl.style.setProperty('--pb', (qi / Q.length * 100) + '%');
+    barEl.style.setProperty('--pb', (Math.min(qi + (sent ? 1 : 0), STEPS) / STEPS * 100) + '%');
+    if (qi >= Q.length && !sent) { renderForm(); return; }
     if (qi >= Q.length) {
       clearInterval(clockT);
-      var s = (Date.now() - t0) / 1000;
-      deck.innerHTML = '<div class="card done"><div class="ok">✓</div><h4>Fertig in ' + fmt(s) + '.</h4><p>Wir melden uns per ' + (answers[4] || 'WhatsApp') + '.<br>Demo, es wird nichts gesendet.</p></div>';
+      var s = (Date.now() - t0) / 1000, d = document.createElement('div');
+      d.className = 'card done';
+      d.innerHTML = '<div class="ok">✓</div><h4></h4><p></p>';
+      d.querySelector('h4').textContent = 'Danke, ' + sent.vn + '! Fertig in ' + fmt(s) + '.';
+      d.querySelector('p').textContent = 'Wir melden uns per ' + (answers[4] || 'WhatsApp') + ' unter ' + sent.tel + '. Demo: Es wird nichts gesendet oder gespeichert.';
+      deck.appendChild(d);
       progEl.textContent = 'Geschafft'; return;
     }
-    for (var k = Math.min(2, Q.length - qi - 1); k >= 1; k--) {
+    for (var k = Math.min(2, Q.length - qi); k >= 1; k--) {
       var b = document.createElement('div'); b.className = 'card back'; b.style.setProperty('--k', k);
-      b.innerHTML = cardHtml(Q[qi + k], qi + k); deck.appendChild(b);
+      b.innerHTML = qi + k < Q.length ? cardHtml(Q[qi + k], qi + k) : FORM_HEAD; deck.appendChild(b);
     }
     var q = Q[qi], c = document.createElement('div'); c.className = 'card';
     c.innerHTML = cardHtml(q, qi);
-    deck.appendChild(c); progEl.textContent = 'Frage ' + (qi + 1) + ' von ' + Q.length;
+    deck.appendChild(c); progEl.textContent = 'Schritt ' + (qi + 1) + ' von ' + STEPS;
     if (!hinted && S6.classList.contains('in')) { hinted = true; c.classList.add('nudge'); }
     $('.opts .l', c).addEventListener('click', function (e) { e.stopPropagation(); answer(false); });
     $('.opts .r', c).addEventListener('click', function (e) { e.stopPropagation(); answer(true); });
