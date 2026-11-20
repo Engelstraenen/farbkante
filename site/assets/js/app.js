@@ -220,7 +220,7 @@
     toast('Foto bleibt auf deinem Gerät (Demo).');
   });
   function ch4(p) {
-    $('.fan', S4).style.setProperty('--fa', (ease(seg(p, .02, .16)) * 120).toFixed(1) + 'deg');
+    $('.fan', S4).style.setProperty('--fa', (ease(seg(p, .02, .16)) * 170 + seg(p, .16, .2) * 191).toFixed(1) + 'deg');
     if (picked < 0) setColor(Math.min(7, Math.floor(seg(p, .14, .5) * 8)));
     var t = ease(seg(p, .52, .64));
     room.style.opacity = (1 - t).toFixed(3);
