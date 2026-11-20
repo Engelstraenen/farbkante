@@ -274,3 +274,6 @@ h1{font-size:var(--h1)}h2{font-size:var(--h2)}h3{font-size:var(--h3);line-height
 }
 
 #bewerben{height:auto}
+
+/* Schritt-Liste nur mit Film (nie Schritte über einem Standbild) */
+#raum .stage:not(.has-vid) .steps{display:none}
