@@ -41,5 +41,7 @@ Storyboard-Wahl (Eugen) → First Frames 4K je Film-Kapitel (Eugen) → Video-Dr
 
 - 20.11.2026: Bewerbung endet mit Kontaktkarte (Vorname, Nachname, Wohnort, E-Mail, Handynummer), mehr Felder nicht (Eugen).
 
+- 20.11.2026: Fassade-Film Draft 2 (Haus ohne Gerüst → Gerüst → ocker) abgenommen (Eugen „Passt“).
+
 ## 10. Ablage
 Code: Dropbox/CLAUDE/Projekte/FARBKANTE · Repo: github.com/Engelstraenen/farbkante (öffentlich) · Storyboards: konzepte/
