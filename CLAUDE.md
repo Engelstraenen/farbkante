@@ -48,6 +48,7 @@ Storyboard-Wahl (Eugen) → First Frames 4K je Film-Kapitel (Eugen) → Video-Dr
 - 20.11.2026: Alle Endvideos auf MiniMax H3 2K (Eugen). Raum-Endrender daher als 15-s-Fassung (Schritte zusammengeschoben), nicht Wan.
 - 20.11.2026: Eugen „Alle passen“: Fassade-Endvideo 2K, Raum-Endvideo 2K und Karriere-Entwurf abgenommen. Karriere-Endrender MiniMax 2K nur nach Kosten-OK.
 - 20.11.2026: Karriere-Endrender MiniMax 2K gemacht (Eugen: „muss nochmal auf 2K“), 1.500 Credits. Alle drei Filme jetzt 2K-Endrender.
+- 20.11.2026: Eugen „Passt“: Karriere-Endvideo 2K und Storyboard-Abgleich abgenommen, Demo fertig (live engelstraenen.github.io/farbkante/).
 
 ## 10. Ablage
 Code: Dropbox/CLAUDE/Projekte/FARBKANTE · Repo: github.com/Engelstraenen/farbkante (öffentlich) · Storyboards: konzepte/
