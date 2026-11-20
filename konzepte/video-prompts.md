@@ -84,3 +84,25 @@ Counts: exactly one painter, exactly one roller, exactly one bucket, exactly two
 Style: photorealistic cinematic interior time-lapse, natural window daylight moving slowly across the floor, ultra sharp wall texture and wet paint sheen, stable room geometry.
 Avoid: camera movement, zoom, cuts, second painter, tools appearing from nowhere, teal paint on the ceiling or cornice, morphing face or hands, changing windows, text, logos, watermark.
 ```
+
+---
+
+# Endrender MiniMax H3 2K (Eugen 20.11.2026: alle Endvideos nur MiniMax 2K, max. 15 s)
+
+- Fassade: First Frame f0-fassade-vorher (4K), Prompt wie Draft 2 (15-s-Fassung, MiniMax), 15 s × 150 = 2.250 Credits.
+- Karriere: First Frame f5-karriere (4K), Prompt Film 3, 10 s × 150 = 1.500 Credits (erst nach Eugens Freigabe des Drafts).
+- Raum: First Frame f4a-raum-vorher (4K), 15-s-Fassung unten, 15 s × 150 = 2.250 Credits. Seiten-Takt passt automatisch (Labels bei 10/30/50/70 % des Films = 1,5 / 4,5 / 7,5 / 10,5 s).
+
+## Film 2c – Raum 15 s (MiniMax H3 2K)
+
+```
+@image1 is the first frame and the only reference. Locked-off static camera on a tripod in the left corner of the room, a true time-lapse of one working day, the painter works in fast motion, the camera never moves, never zooms, never cuts. Layout from left to right: the left wall with a tall double window and a radiator, the back wall with a second tall double window and a radiator, the right wall fully visible, old patchy grey-beige walls with cracks, small holes and remains of torn wallpaper, an ornate white stucco cornice, a bare worn wooden floor. The professional painter in white painter's clothes stands in the right third with a roll of grey protective fleece; a paint bucket, a long-handled paint roller and a wide putty spatula lie on the floor next to him from the start.
+Second 0-0.5: the bare old room, the painter holds the fleece roll.
+Second 0.5-4.5 (covering): in fast motion he rolls out the grey protective fleece over the whole wooden floor strip by strip from the right wall to the left wall, then tapes the window frames and skirting boards with masking tape and wraps both radiators in clear plastic foil.
+Second 4.5-7.5 (filling): with the wide putty spatula he fills every crack and hole in the right wall and the back wall with white filler, the old wallpaper remains disappear, the white patches are sanded flat and smooth.
+Second 7.5-10.5 (priming): with the long-handled roller he rolls milky white primer over the right wall and the back wall, the patchy grey-beige walls turn evenly bright matte white.
+Second 10.5-15 (painting): he dips the roller into the bucket and rolls deep teal paint onto the right wall in long vertical lanes from the stucco cornice down to the skirting board, lane after lane from left to right, until the whole right wall is wet glossy deep teal with a crisp straight line under the white cornice; the back wall stays clean bright white; at second 15 he stands in the right third, holds the roller still and looks at the finished wall.
+Counts: exactly one painter, exactly one roller, exactly one bucket, exactly two tall double windows, exactly two radiators, the stucco cornice always stays white.
+Style: photorealistic cinematic interior time-lapse, natural window daylight moving slowly across the floor, ultra sharp wall texture and wet paint sheen, stable room geometry.
+Avoid: camera movement, zoom, cuts, second painter, tools appearing from nowhere, teal paint on the ceiling or cornice, morphing face or hands, changing windows, text, logos, watermark.
+```

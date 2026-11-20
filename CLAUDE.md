@@ -45,5 +45,7 @@ Storyboard-Wahl (Eugen) → First Frames 4K je Film-Kapitel (Eugen) → Video-Dr
 
 - 20.11.2026: Raum-Film Draft 2 (Abdecken → Spachteln → Grundieren → Streichen) abgenommen (Eugen „Passt“).
 
+- 20.11.2026: Alle Endvideos auf MiniMax H3 2K (Eugen). Raum-Endrender daher als 15-s-Fassung (Schritte zusammengeschoben), nicht Wan.
+
 ## 10. Ablage
 Code: Dropbox/CLAUDE/Projekte/FARBKANTE · Repo: github.com/Engelstraenen/farbkante (öffentlich) · Storyboards: konzepte/
