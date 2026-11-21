@@ -10,6 +10,7 @@ Probleme, die die Seite löst: Nachwuchs/Fachkräfte (Azubi- und Mitarbeiter-Gew
 - Niveau wie LICHTBOGEN V3: Fotolook in 4K, cinematic, dunkle Farbwelt, alles bewegt sich und ist anklickbar.
 
 ## 3. Regeln für dieses Projekt
+- ALLE SEITEN MOBIL-OPTIMIERT (Eugen 21.11.2026, VERBINDLICH): Jedes Kapitel, Modal, Menü, Formular und der Footer werden fürs Handy angepasst und vor jeder Lieferung in 390×844, 360×740, 430×932 und quer 844×390 geprüft.
 - 2K-ENDRENDER NIE MIT REFERENZVIDEO (Eugen 20.11.2026, VERBINDLICH): Draft → 2K nur per Prompt + Einstellung 2K, nie das Draft-Video als Referenz; höchstens das 4K-Startbild als First Frame. Seite liefert die 2K-Dateien unverkleinert (tools/video.py: Desktop 2560×1440, Handy hochkant -p 1080×1440, Handy quer -m 1280).
 - Keine echten Firmen, keine Preise/Euro, kein Wort „KI“, keine Rechtsaussagen.
 - Demo-Hinweis oben auf jeder Seite, Formulare senden nichts. Persönlicher Link per `?firma=Name`.

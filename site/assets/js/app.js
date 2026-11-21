@@ -117,11 +117,28 @@
         s.style.setProperty('--bp', (b[0] / (1 - hgt) * 100) + '%');
       } else s.classList.add('noimg');
     });
-    if (GEO.frame && !mobile()) {
-      var f = GEO.frame; frameIn.style.setProperty('--fx0', f[0] * 100 + '%'); frameIn.style.setProperty('--fy0', f[1] * 100 + '%');
-      frameIn.style.setProperty('--fw', (f[2] - f[0]) * 100 + '%'); frameIn.style.setProperty('--fh', (f[3] - f[1]) * 100 + '%');
-    }
   })();
+  // Streifen genau in den Bilderrahmen legen; am Handy aus der echten Bildlage (object-fit: cover) berechnet
+  var SW = 1;
+  function placeFrame() {
+    var f = GEO.frame; if (!f) return;
+    if (!mobile()) {
+      SW = 1;
+      frameIn.style.setProperty('--fx0', f[0] * 100 + '%'); frameIn.style.setProperty('--fy0', f[1] * 100 + '%');
+      frameIn.style.setProperty('--fw', (f[2] - f[0]) * 100 + '%'); frameIn.style.setProperty('--fh', (f[3] - f[1]) * 100 + '%');
+    } else {
+      var st = $('.stage', S2), W = st.clientWidth, H = st.clientHeight, im = IMG['m2-rahmen'] || { w: 5504, h: 3072 };
+      var s = Math.max(W / im.w, H / im.h), dw = im.w * s, dh = im.h * s, ox = (W - dw) / 2, oy = (H - dh) / 2;
+      var x0 = Math.max(14, ox + f[0] * dw), x1 = Math.min(W - 14, ox + f[2] * dw);
+      var y0 = Math.max(62, oy + f[1] * dh), y1 = Math.min(H - 40, oy + f[3] * dh);
+      frameIn.style.setProperty('--fx0', x0.toFixed(1) + 'px'); frameIn.style.setProperty('--fy0', y0.toFixed(1) + 'px');
+      frameIn.style.setProperty('--fw', (x1 - x0).toFixed(1) + 'px'); frameIn.style.setProperty('--fh', (y1 - y0).toFixed(1) + 'px');
+      // hochkant: Streifen breiter, damit der gemalte Teil die ganze Breite füllt
+      SW = W < H ? 1.18 : 1;
+    }
+    stripes.forEach(function (s) { s.style.width = (SW * 100) + '%'; });
+  }
+  placeFrame(); addEventListener('resize', placeFrame);
   var INFO = [
     ['Innen', 'Wände & Decken', 'Abdecken, spachteln, streichen. Wir räumen auf, bevor wir gehen.', ['Altbau mit Stuck', 'Treppenhäuser', 'Büros am Wochenende']],
     ['Fassade', 'Außen', 'Gerüst, Reinigung, Risse, Anstrich. Ein Ansprechpartner von der Planung bis zum Abbau.', ['Fassadenanstrich', 'Wärmedämmung', 'Graffiti-Schutz']],
@@ -141,19 +158,19 @@
   });
   $('.sheet-x', S2).addEventListener('click', function () { sheet.hidden = true; });
   function ch2(p) {
-    $('.frame-img', S2).style.setProperty('--fz', (1.5 - .5 * eout(seg(p, 0, .14))).toFixed(3));
-    frameIn.style.opacity = seg(p, .08, .14).toFixed(3);
-    S2.querySelector('.ch-title').style.setProperty('--to', seg(p, .12, .2).toFixed(3));
-    var k = seg(p, .14, .9) * 5, act = Math.min(4, Math.floor(k));
+    $('.frame-img', S2).style.setProperty('--fz', (1.5 - .5 * eout(seg(p, 0, .1))).toFixed(3));
+    frameIn.style.opacity = seg(p, 0, .05).toFixed(3);
+    S2.querySelector('.ch-title').style.setProperty('--to', seg(p, .04, .12).toFixed(3));
+    var k = seg(p, .05, .9) * 5, act = Math.min(4, Math.floor(k));
     stripes.forEach(function (s, i) {
       var r = clamp(k - i, 0, 1), e = ease(r) * STRIPE_END * 100;
       s.style.setProperty('--rv', (r >= 1 ? STRIPE_END * 100 + 3 : e).toFixed(2) + '%');
       s.style.setProperty('--lo', seg(r, .5, 1).toFixed(3));
     });
     var r = clamp(k - act, 0, 1), b = BANDS[act];
-    roller2.style.left = (ease(r) * STRIPE_END * 100).toFixed(2) + '%';
+    roller2.style.left = (ease(r) * STRIPE_END * 100 * SW).toFixed(2) + '%';
     roller2.style.top = ((b[0] + b[1]) / 2 * 100).toFixed(2) + '%';
-    roller2.style.opacity = (p > .9 ? 1 - seg(p, .9, .97) : seg(p, .1, .16)).toFixed(3);
+    roller2.style.opacity = (p > .9 ? 1 - seg(p, .9, .97) : seg(p, .03, .07)).toFixed(3);
   }
 
   /* 3 Raum für Raum */
@@ -217,10 +234,12 @@
     r.addEventListener('input', function () { vals[r.getAttribute('data-k')] = parseFloat(r.value); calcUpd(); });
   });
   calcUpd();
-  $('.shot input', phone).addEventListener('change', function () {
-    var f = this.files && this.files[0]; if (!f) return;
-    var u = URL.createObjectURL(f); $('.cam', phone).style.setProperty('--camimg', 'url(' + u + ')');
-    toast('Foto bleibt auf deinem Gerät (Demo).');
+  $$('.shot input, .shot2 input', S4).forEach(function (inp) {
+    inp.addEventListener('change', function () {
+      var f = this.files && this.files[0]; if (!f) return;
+      var u = URL.createObjectURL(f); $('.cam', phone).style.setProperty('--camimg', 'url(' + u + ')');
+      toast('Foto bleibt auf deinem Gerät (Demo).');
+    });
   });
   function ch4(p) {
     $('.fan', S4).style.setProperty('--fa', (ease(seg(p, .02, .16)) * 170 + seg(p, .16, .2) * 191).toFixed(1) + 'deg');
@@ -235,7 +254,7 @@
       // Handy: Fächer + Farben weichen, das Handy-Bild rückt nach oben über den Rechner
       var hh = $('.lab-h', S4), dy = labR.offsetTop - (labL.offsetTop + hh.offsetTop + hh.offsetHeight + 12);
       labL.querySelectorAll('.fan,.chips,.lab-name').forEach(function (e) { e.style.opacity = (1 - t).toFixed(3); });
-      labR.style.transform = 'translateY(' + (-dy * t).toFixed(1) + 'px)';
+      labR.style.transform = innerWidth < innerHeight ? 'translateY(' + (-dy * t).toFixed(1) + 'px)' : '';
     } else { labL.style.opacity = (1 - .55 * t).toFixed(3); labR.style.transform = ''; }
     calc.classList.toggle('on', p > .62 && p < .99);
     // Messfeld zieht sich beim Scrollen auf
@@ -250,6 +269,23 @@
     if (IMG[n]) el.style.backgroundImage = 'url("' + absUrl(src(n, true)) + '")';
     else el.style.background = 'var(--teal)';
   });
+  // Handy: lange Vorteil-Wörter (z. B. „Eigenes Werkzeug.“) so verkleinern, dass sie in die Breite passen
+  function fitPk() {
+    PK.forEach(function (pk) {
+      var h = $('h3', pk), w = $('.pk-w', pk); h.style.fontSize = '';
+      if (!mobile()) return;
+      for (var i = 0; i < 3; i++) {
+        var av = pk.clientWidth - 6, ww = w.offsetWidth;
+        if (ww <= av) break;
+        h.style.fontSize = (parseFloat(getComputedStyle(h).fontSize) * av / ww).toFixed(1) + 'px';
+      }
+    });
+  }
+  fitPk(); addEventListener('resize', fitPk);
+  // Kopfleiste sitzt direkt unter der (am Handy mehrzeiligen) Demo-Leiste
+  function demoH() { var d = $('.demo'); if (d) root.style.setProperty('--dh', d.offsetHeight + 'px'); }
+  demoH(); addEventListener('resize', demoH);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitPk);
   function ch5(p) {
     f5(seg(p, 0, 1), 1.02 + .1 * p);
     show(b5[0], band(p, .02, .2));
@@ -398,12 +434,12 @@
   /* 7 Finale: Rolle malt die Wortmarke */
   var S7 = $('#termin'), paint = $('.paint', S7), roller7 = $('.roller', S7);
   function ch7(p) {
-    var t = ease(seg(p, .05, .7)), end = (GEO.paintEnd || .9) * 100;
+    var t = ease(seg(p, 0, .62)), end = (GEO.paintEnd || .9) * 100;
     paint.style.setProperty('--pv', (t * end).toFixed(2) + '%');
     paint.style.setProperty('--wv', (seg(t * end, 8, end) * 100).toFixed(2) + '%');
     roller7.style.left = (t * end).toFixed(2) + '%'; roller7.style.top = (GEO.paintY || 50) + '%';
-    roller7.style.opacity = (1 - seg(p, .72, .8)).toFixed(3);
-    S7.querySelector('.fin').style.setProperty('--fo', seg(p, .6, .78).toFixed(3));
+    roller7.style.opacity = (1 - seg(p, .64, .72)).toFixed(3);
+    S7.querySelector('.fin').style.setProperty('--fo', seg(p, .55, .72).toFixed(3));
   }
 
   /* ---------- Schleife ---------- */
