@@ -381,3 +381,6 @@ h1{font-size:var(--h1)}h2{font-size:var(--h2)}h3{font-size:var(--h3);line-height
 @media (max-width:900px) and (orientation:landscape){
   .chips{grid-template-columns:repeat(8,minmax(0,40px))}
 }
+
+/* Drohnenflug (Film 1c) im Fenster-Element: eigenes has-vid, Standbild nur als Rückfall */
+.stage .window .vid{opacity:0}.stage .window.has-vid .vid{opacity:1}.window.has-vid>.still{opacity:0}

@@ -63,19 +63,20 @@
   function band(p, a, b, f) { f = f || .06; return Math.min(seg(p, a, a + f), 1 - seg(p, b - f, b)); }
 
   /* ---------- Film-Kapitel: Video spulen oder Standbild mit Kamerafahrt ---------- */
-  function Film(sec, from, to) {
-    var v = $('.vid', sec), stage = $('.stage', sec), ok = false;
-    var base = v.getAttribute('data-src');
-    if (base && (window.FK_VID || {})[sec.id]) {
+  function Film(sec, from, to, box) {
+    box = box || $('.media', sec);
+    var v = $('.vid', box), stage = $('.stage', sec), ok = false, own = !box.classList.contains('media');
+    var base = v.getAttribute('data-src'), key = v.getAttribute('data-key') || sec.id;
+    if (base && (window.FK_VID || {})[key]) {
       var s = document.createElement('source');
       // volle 2K-Auflösung: Desktop 2560, Handy hochkant 1080x1440-Ausschnitt (-p), Handy quer 1280 (-m)
       s.src = base + (mobile() ? (innerWidth / innerHeight <= .75 ? '-p' : '-m') : '') + '.mp4?v=' + FK_VID._v; s.type = 'video/mp4'; v.appendChild(s);
-      v.addEventListener('loadeddata', function () { ok = true; stage.classList.add('has-vid'); });
+      v.addEventListener('loadeddata', function () { ok = true; (own ? box : stage).classList.add('has-vid'); });
       v.load(); var pr = v.play && v.play(); if (pr && pr.then) pr.then(function () { v.pause(); }).catch(function () {});
     }
     var want = 0, cur = 0;
     return function (p, z) {
-      $('.media', sec).style.setProperty('--z', z);
+      if (z != null) box.style.setProperty('--z', z);
       if (ok && v.duration) {
         want = from + (Math.min(to || v.duration, v.duration - .05) - from) * p;
         cur += (want - cur) * .35;
@@ -86,7 +87,24 @@
 
   /* 1 Fassade */
   var S1 = $('#fassade'), f1 = Film(S1, 0), b1 = $$('.beat', S1), t1 = $('.tag', S1);
+  // Drohnenflug ins Fenster (Film 1c): ersetzt Fenster-Standbild + Zoom, endet im Bilderrahmen von Kapitel 2
+  var winEl = $('.window', S1), fD = Film(S1, 0, null, winEl), HASD = !!(window.FK_VID || {}).drohne;
+  if (HASD) S1.style.setProperty('--h', '560vh');
+  function ch1d(p) {
+    var A = .6;  // Fassade-Film bis 60 %, danach Drohnenflug
+    f1(seg(p, 0, A), 1 + .14 * ease(seg(p, 0, A)));
+    show(b1[0], 1 - seg(p, .05, .12), 30);
+    show(b1[1], band(p, .1, .33));
+    show(b1[2], band(p, .35, .58));
+    t1.classList.toggle('on', p > .35 && p < .6);
+    // Drohnenfilm setzt ohne Sprung am letzten Fassade-Bild an, fliegt rein, zoomt am Ende ins Innere des Rahmens
+    winEl.style.opacity = seg(p, A - .015, A + .01).toFixed(3);
+    fD(seg(p, A + .01, .94));
+    winEl.style.setProperty('--wz', (1 + 1.6 * Math.pow(ease(seg(p, .94, 1)), 1.4)).toFixed(3));
+    $('.wipe', S1).style.opacity = seg(p, .965, 1).toFixed(3);
+  }
   function ch1(p) {
+    if (HASD) return ch1d(p);
     f1(seg(p, 0, .72), 1 + .14 * ease(seg(p, 0, .72)));
     show(b1[0], 1 - seg(p, .06, .14), 30);
     // Film-Takt (Fassade 2K, 13,9 s): Gerüst wächst 2,5–7,5 s, Streichen 8–13,5 s

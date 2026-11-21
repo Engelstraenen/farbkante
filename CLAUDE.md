@@ -34,6 +34,7 @@ Storyboard-Wahl (Eugen) → First Frames 4K je Film-Kapitel (Eugen) → Video-Dr
 - Wahl Mix A „Ein Raum“ oder Mix B „Ein Haus“ (Storyboards in konzepte/mix-a-*, mix-b-*). Kapitel-Material: konzepte/4-, 5-, 6-.
 
 ## 9. Entschieden
+- 21.11.2026: Übergang Fassade → Leistungen als Drohnenflug ins Fenster (Storyboard 2, konzepte/storyboard-fenster/B-…), Konzept + Prompt in konzepte/drohnenflug-fenster.md.
 - 19.11.2026: Name FARBKANTE, Stadt Essen (Annahme, kein Widerspruch).
 - 19.11.2026: Storyboards 1 Rolle, 2 Krepp ab, 3 Zeitraffer gezeigt. Krepp abgelehnt (nicht maler-typisch). Eugens Wahl: Mix aus 1 + 3 wie FLUTLICHT27, Kapitel frei verbinden, Farblabor und alle Ideen rein, Recruiting (Azubis/Mitarbeiter) besonders wichtig.
 - 19.11.2026: Konzepte nur als Bild (globale Masterfile V2.17), Handwerks-Demo-Regeln (V2.18).
